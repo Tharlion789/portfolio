@@ -643,7 +643,8 @@
     </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         async function downloadPDF() {
             const btn = document.getElementById('btn-download-pdf');
@@ -652,28 +653,28 @@
             btn.innerHTML = '⏳ Gerando PDF...';
 
             try {
-                if (typeof html2pdf === 'undefined') {
+                if (typeof html2canvas === 'undefined' || !window.jspdf) {
                     window.print();
                     return;
                 }
 
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
                 const pages = document.querySelectorAll('#cv-pages .page');
-                const opt = {
-                    margin: 0,
-                    filename: 'Tharlion-Rodrigues-Curriculo.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2, useCORS: true, logging: false },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                };
 
-                let worker = html2pdf().set(opt).from(pages[0]).toPdf();
-                for (let i = 1; i < pages.length; i++) {
-                    worker = worker.get('pdf').then(pdf => {
-                        pdf.addPage();
-                    }).from(pages[i]).toContainer().toCanvas().toPdf();
+                for (let i = 0; i < pages.length; i++) {
+                    if (i > 0) pdf.addPage();
+                    const canvas = await html2canvas(pages[i], {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: '#ffffff'
+                    });
+                    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
                 }
 
-                await worker.save();
+                pdf.save('Tharlion-Rodrigues-Curriculo.pdf');
             } catch (err) {
                 console.error('Erro ao gerar PDF:', err);
                 window.print();
