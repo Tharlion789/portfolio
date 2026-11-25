@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currículo — Tharlion Rodrigues de França</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --sidebar-bg: #e5e7eb;
+            --text-dark: #374151;
+            --text-muted: #4b5563;
+            --accent: #ea580c;
+            --border-line: #9ca3af;
+            --page-bg: #ffffff;
+        }
 
         * {
             box-sizing: border-box;
@@ -15,339 +24,618 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #1e293b;
-            background-color: #f1f5f9;
-            line-height: 1.5;
-            padding: 24px;
+            color: var(--text-dark);
+            background-color: #d1d5db;
+            line-height: 1.48;
+            padding: 24px 12px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
-        .cv-container {
-            max-width: 860px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 48px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-radius: 8px;
-        }
-
-        /* Header */
-        header {
-            border-bottom: 2px solid #0f172a;
-            padding-bottom: 18px;
-            margin-bottom: 22px;
-        }
-
-        h1 {
-            font-size: 26px;
-            font-weight: 700;
-            color: #0f172a;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
-            font-size: 14px;
-            font-weight: 600;
-            color: #475569;
-            margin-top: 4px;
-            margin-bottom: 12px;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 18px;
-            font-size: 12px;
-            color: #334155;
-        }
-
-        .contact-info a {
-            color: #2563eb;
-            text-decoration: none;
-        }
-
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-
-        /* Sections */
-        section {
-            margin-bottom: 22px;
-        }
-
-        h2 {
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #0f172a;
-            border-bottom: 1px solid #cbd5e1;
-            padding-bottom: 4px;
-            margin-bottom: 10px;
-        }
-
-        p, li {
-            font-size: 12.5px;
-            color: #334155;
-            text-align: justify;
-        }
-
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 6px;
-            font-size: 12px;
-        }
-
-        .skill-item strong {
-            color: #0f172a;
-        }
-
-        /* Projects */
-        .project-item {
-            margin-bottom: 14px;
-            page-break-inside: avoid;
-        }
-
-        .project-header {
+        .toolbar {
+            max-width: 210mm;
+            margin: 0 auto 16px auto;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 2px;
+            align-items: center;
+            gap: 12px;
         }
 
-        .project-title {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        .project-tech {
-            font-size: 11.5px;
-            font-weight: 500;
-            color: #475569;
-            font-style: italic;
-        }
-
-        .project-bullets {
-            margin-top: 4px;
-            padding-left: 16px;
-            list-style-type: disc;
-        }
-
-        .project-bullets li {
-            font-size: 12px;
-            margin-bottom: 2px;
-            color: #334155;
-        }
-
-        .education-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12.5px;
-        }
-
-        .btn-print {
-            display: block;
-            margin: 0 auto 20px auto;
-            padding: 10px 24px;
-            background-color: #0f172a;
+        .btn-action {
+            padding: 10px 20px;
+            background-color: #1f2937;
             color: #ffffff;
             border: none;
             border-radius: 6px;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.2s ease;
         }
 
-        .btn-print:hover {
-            background-color: #1e293b;
+        .btn-action:hover {
+            background-color: #111827;
         }
 
-        /* Print Settings (A4) */
+        .btn-secondary {
+            background-color: #4b5563;
+        }
+
+        .btn-secondary:hover {
+            background-color: #374151;
+        }
+
+        /* A4 Page Container */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 24px auto;
+            background: var(--page-bg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: grid;
+            grid-template-columns: 31% 69%;
+            overflow: hidden;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            background-color: var(--sidebar-bg);
+            padding: 36px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .name-block h1 {
+            font-size: 31px;
+            font-weight: 800;
+            line-height: 1.12;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .role-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+        }
+
+        .role-square {
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .location-line {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 8px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Spaced Section Headings */
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            padding-bottom: 8px;
+            border-bottom: 1.5px solid var(--border-line);
+            margin-bottom: 14px;
+        }
+
+        .sidebar-subheading {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            margin-top: 4px;
+        }
+
+        .edu-item {
+            margin-bottom: 14px;
+        }
+
+        .edu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .edu-degree {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.35;
+        }
+
+        .edu-school {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .edu-date {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .skill-list {
+            list-style: disc;
+            padding-left: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5px;
+        }
+
+        .skill-list li {
+            font-size: 11.3px;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        /* Right Main Content */
+        .main {
+            padding: 36px 34px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Header with Photo & Contacts */
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding-bottom: 6px;
+        }
+
+        .photo-wrapper {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 3px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .contact-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11.5px;
+            color: var(--text-dark);
+        }
+
+        .contact-icon {
+            width: 18px;
+            height: 18px;
+            background-color: var(--text-dark);
+            color: #ffffff;
+            border-radius: 3px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-row a {
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .contact-row a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-text {
+            font-size: 11.8px;
+            color: var(--text-muted);
+            line-height: 1.55;
+            text-align: left;
+        }
+
+        .profile-text + .profile-text {
+            margin-top: 10px;
+        }
+
+        /* Experience & Projects */
+        .exp-item {
+            margin-bottom: 16px;
+            page-break-inside: avoid;
+        }
+
+        .exp-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .exp-role {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .exp-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 1px;
+            margin-bottom: 6px;
+        }
+
+        .exp-company {
+            font-weight: 500;
+        }
+
+        .exp-date {
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .exp-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5px;
+        }
+
+        .exp-bullets li {
+            font-size: 11.4px;
+            color: var(--text-muted);
+            line-height: 1.45;
+            position: relative;
+            padding-left: 11px;
+        }
+
+        .exp-bullets li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        /* Print Settings */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
         @media print {
             body {
                 background: #ffffff;
                 padding: 0;
             }
 
-            .cv-container {
-                box-shadow: none;
-                padding: 0;
-                max-width: 100%;
-            }
-
-            .btn-print {
+            .toolbar {
                 display: none;
             }
 
-            a {
-                color: #0f172a;
-                text-decoration: none;
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                min-height: 297mm;
+                page-break-after: always;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+        }
+
+        @media screen and (max-width: 820px) {
+            .page {
+                width: 100%;
+                min-height: auto;
+                grid-template-columns: 1fr;
+            }
+
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 <body>
 
-    <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar como PDF</button>
+    <div class="toolbar">
+        <a href="index.html" class="btn-action btn-secondary">← Voltar ao Portfólio</a>
+        <button class="btn-action" onclick="window.print()">🖨️ Imprimir / Salvar como PDF</button>
+    </div>
 
-    <div class="cv-container">
-        <!-- HEADER -->
-        <header style="display: flex; justify-content: space-between; align-items: center; gap: 24px;">
-            <div style="flex: 1;">
-                <h1>Tharlion Rodrigues de França</h1>
-                <div class="subtitle">Desenvolvedor Full Stack • Software Engineer (Node.js | TypeScript | Python | PHP | WebRTC | IA)</div>
-                <div class="contact-info">
-                    <span>📍 Goiânia, GO (Disponível Remoto / Híbrido)</span>
-                    <span>📞 <a href="tel:+5562998183049">+55 (62) 99818-3049</a></span>
-                    <span>✉️ <a href="mailto:tharlion789@gmail.com">tharlion789@gmail.com</a></span>
-                    <span>💼 <a href="https://www.linkedin.com/in/tharlion-fran%C3%A7a" target="_blank">linkedin.com/in/tharlion-frança</a></span>
-                    <span>💻 <a href="https://github.com/Tharlion789" target="_blank">github.com/Tharlion789</a></span>
+    <!-- ==================== PAGE 1 ==================== -->
+    <div class="page">
+        <!-- Left Sidebar (Page 1) -->
+        <aside class="sidebar">
+            <div class="name-block">
+                <h1>Tharlion<br>Rodrigues<br>de França</h1>
+                <div class="role-line">
+                    <span class="role-square"></span>
+                    <span>Desenvolvedor Full Stack</span>
+                </div>
+                <div class="location-line">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>Goiânia, GO — Brasil</span>
                 </div>
             </div>
-            <div style="width: 82px; height: 82px; border-radius: 12px; overflow: hidden; border: 2px solid #0f172a; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                <img src="assets/img/profile.jpg" alt="Tharlion Rodrigues" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-        </header>
 
-        <!-- RESUMO PROFISSIONAL -->
-        <section>
-            <h2>Resumo Profissional</h2>
-            <p>
-                Desenvolvedor de Software Full Stack com <strong>mais de 4 anos de atuação prática</strong> na concepção, arquitetura e entrega de ecossistemas digitais de alto desempenho, atuando de ponta a ponta em projetos individuais de alta complexidade e como freelancer. Especialista em transmissão de mídia em baixa latência (WebRTC P2P e WebSockets), computação visual e Inteligência Artificial (PyTorch, Diffusers, OpenCV) e plataformas SaaS comerciais com automação financeira (PIX) e compliance com LGPD. Autonomia integral para arquitetura, desenvolvimento full stack e deploy de produtos escaláveis sob ambiente Linux/Nginx.
-            </p>
-        </section>
-
-        <!-- EXPERIÊNCIA PROFISSIONAL -->
-        <section>
-            <h2>Experiência Profissional</h2>
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">Desenvolvedor Full Stack / Software Engineer — Projetos Individuais & Freelancer</span>
-                    <span class="project-tech">2020 – Presente (+4 anos)</span>
+            <div>
+                <h2 class="section-title">Formação</h2>
+                <div class="edu-item">
+                    <div class="edu-degree">Curso Superior de Tecnologia (CST), Desenvolvimento Web e Mobile</div>
+                    <div class="edu-school">Escola do Futuro de Goiás</div>
+                    <div class="edu-date">2024 – 2026 • Média 8.8</div>
                 </div>
-                <ul class="project-bullets">
-                    <li>Atuação autônoma no ciclo de vida completo de engenharia de software: levantamento de requisitos, arquitetura de sistemas escaláveis, desenvolvimento frontend/backend, modelagem de banco de dados e deploy em servidores VPS Linux (Nginx/Node/PHP/Python).</li>
-                    <li>Desenvolvimento e entrega de plataformas SaaS comerciais com checkout de pagamentos instantâneos (PIX), split de comissões para afiliados e conformidade com a LGPD.</li>
-                    <li>Concepção de ecossistemas de mensageria em tempo real, bots e automação de atendimento via WhatsApp (Baileys) com proteção anti-bloqueio.</li>
-                    <li>Pesquisa, prototipagem e implementação de soluções de inteligência artificial aplicada, computação gráfica em Canvas 2D e transmissão multimídia de ultra baixa latência.</li>
+                <div class="edu-item">
+                    <div class="edu-degree">Análise e Desenvolvimento de Sistemas (ADS)</div>
+                    <div class="edu-school">Faculdade SENAI Fatesg</div>
+                    <div class="edu-date">2021 – 2023</div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="section-title">Skills</h2>
+                <ul class="skill-list">
+                    <li>JavaScript (ES6+)</li>
+                    <li>TypeScript</li>
+                    <li>Node.js</li>
+                    <li>Express.js</li>
+                    <li>Python</li>
+                    <li>FastAPI</li>
+                    <li>Django REST Framework</li>
+                    <li>PHP 8.2+</li>
+                    <li>Laravel</li>
+                    <li>React.js</li>
+                    <li>Next.js</li>
+                    <li>React Native</li>
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>Tailwind CSS</li>
+                    <li>Amazon Web Services (AWS)</li>
+                    <li>AWS Lambda</li>
+                    <li>AWS IoT</li>
+                    <li>Google Cloud Platform (GCP)</li>
+                    <li>MySQL</li>
+                    <li>PostgreSQL</li>
+                    <li>Git</li>
+                    <li>Docker</li>
+                    <li>Linux &amp; Nginx</li>
                 </ul>
             </div>
-        </section>
+        </aside>
 
-        <!-- COMPETÊNCIAS TÉCNICAS -->
-        <section>
-            <h2>Competências Técnicas</h2>
-            <div class="skills-grid">
-                <div class="skill-item"><strong>Linguagens:</strong> TypeScript, JavaScript (ES6+), Python 3.10+, PHP 8.2+, SQL, HTML5, CSS3.</div>
-                <div class="skill-item"><strong>Backend & APIs:</strong> Node.js, Express.js, FastAPI, Slim Framework (PSR-7), WebSockets (Socket.io / ws), RESTful APIs.</div>
-                <div class="skill-item"><strong>Streaming & Tempo Real:</strong> WebRTC P2P (SDP Injection, ICE Candidates), Web Audio API, FFmpeg, HLS, Aria2 JSON-RPC.</div>
-                <div class="skill-item"><strong>Inteligência Artificial & Mídia:</strong> PyTorch, Hugging Face Diffusers (Text-to-Video), Real-ESRGAN, waifu2x-ncnn-vulkan, OpenCV.</div>
-                <div class="skill-item"><strong>Frontend & Gráficos:</strong> Next.js (App Router), React, Vite, Tailwind CSS, Canvas 2D API (60 FPS FX), PySide6 (Qt).</div>
-                <div class="skill-item"><strong>Bancos de Dados & Cloud:</strong> MySQL, PostgreSQL (Supabase), Cloudflare R2, Google Cloud Storage Pool, Redis.</div>
-                <div class="skill-item"><strong>Segurança & DevOps:</strong> Linux, Nginx, Git, JWT, Criptografia Bcrypt, RBAC, 2FA, LGPD, Docker.</div>
-            </div>
-        </section>
-
-        <!-- PROJETOS DE ENGENHARIA & EXPERIÊNCIA PRÁTICA -->
-        <section>
-            <h2>Projetos de Engenharia & Casos Reais</h2>
-
-            <!-- Projeto 1: KumaLIVE -->
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">KumaLIVE — Plataforma de Streaming WebRTC, Comunidades & Motor Gráfico 2D</span>
-                    <span class="project-tech">WebRTC, Canvas 2D, Web Audio API, PHP, MySQL, Nginx</span>
+        <!-- Right Main Content (Page 1) -->
+        <main class="main">
+            <header class="main-header">
+                <div class="photo-wrapper">
+                    <img src="assets/img/profile.jpg" alt="Tharlion Rodrigues de França">
                 </div>
-                <ul class="project-bullets">
-                    <li>Arquitetou ecossistema de streaming P2P com latência aferida inferior a 300ms em 1080p a 60 FPS com manipulação direta de parâmetros SDP e fila de ICE Candidates contra atrasos.</li>
-                    <li>Desenvolveu o <em>Kuma FX Engine</em>, motor gráfico procedural em Canvas 2D a 60 FPS com 24+ temas e partículas matemáticas reativas sem gargalo de GPU/CPU.</li>
-                    <li>Sintetizou efeitos sonoros e paisagens ambientais em tempo real utilizando Web Audio API nativa com osciladores dinâmicos.</li>
-                    <li>Construiu arquitetura social estilo Discord (servidores, canais de voz/texto, DMs com busca de GIFs) e economia virtual com Season Pass e loja de cosméticos.</li>
-                    <li>Implementou painel Super Admin com telemetria de infraestrutura Linux/Nginx/MySQL e gráficos analíticos em tempo real.</li>
+                <div class="contact-list">
+                    <div class="contact-row">
+                        <span class="contact-icon">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </span>
+                        <a href="mailto:tharlion789@gmail.com">tharlion789@gmail.com</a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-icon">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                        </span>
+                        <a href="tel:+5562998183049">+55 62 99818-3049</a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-icon">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </span>
+                        <a href="https://www.linkedin.com/in/tharlion-fran%C3%A7a/" target="_blank">www.linkedin.com/in/tharlion-frança</a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-icon">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </span>
+                        <a href="https://github.com/Tharlion789" target="_blank">github.com/Tharlion789</a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-icon">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </span>
+                        <a href="https://tharlion789.github.io/portfolio/" target="_blank">tharlion789.github.io/portfolio</a>
+                    </div>
+                </div>
+            </header>
+
+            <section>
+                <h2 class="section-title">Perfil</h2>
+                <p class="profile-text">
+                    Software Engineer &amp; Desenvolvedor Full Stack com mais de 7 anos de atuação prática na arquitetura e entrega de ecossistemas digitais de ponta a ponta. Atuo principalmente com Node.js, TypeScript, Python, PHP e serviços em nuvem (AWS e GCP), entregando aplicações escaláveis, seguras e orientadas a produto.
+                </p>
+                <p class="profile-text">
+                    Tenho forte domínio em transmissão de mídia de baixa latência (WebRTC P2P &lt;300ms e WebSockets), computação visual (Canvas 2D a 60 FPS), Inteligência Artificial aplicada (PyTorch, Diffusers) e desenvolvimento mobile — conduzindo projetos da arquitetura inicial até a publicação na Google Play Store.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="section-title">Experiência Profissional</h2>
+
+                <div class="exp-item">
+                    <div class="exp-role">Desenvolvedor Full Stack Senior</div>
+                    <div class="exp-meta">
+                        <span class="exp-company">Dark Knight</span>
+                        <span class="exp-date">Jun 2024 – Presente</span>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Desenvolvimento ponta a ponta de sistemas web sob medida e aplicações mobile utilizando Node.js, TypeScript, JavaScript e Git.</li>
+                        <li>Implementação e integração de arquiteturas serverless e dispositivos conectados na nuvem com AWS Lambda e AWS IoT.</li>
+                        <li>Condução do ciclo completo de publicação na Google Play Store (empacotamento, conformidade, assinatura digital e releases).</li>
+                        <li>Arquitetura e entrega de ecossistemas próprios de streaming e gestão em produção (KumaLIVE e KumaSistem).</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-role">Desenvolvedor Full Stack Pleno</div>
+                    <div class="exp-meta">
+                        <span class="exp-company">Datum (Alocado nas Lojas Renner S.A.)</span>
+                        <span class="exp-date">Nov 2022 – Jun 2024</span>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Atuação em varejo omnichannel de grande escala, realizando manutenção preventiva, corretiva e evolutiva da plataforma de e-commerce de alto tráfego da Renner.</li>
+                        <li>Desenvolvimento e integração de aplicações para totens de autoatendimento em lojas físicas, serviços de backend, APIs e frontends responsivos.</li>
+                        <li>Colaboração com times multidisciplinares focados em estabilidade, performance e experiência de compra omnichannel.</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-role">Desenvolvedor Web Autônomo</div>
+                    <div class="exp-meta">
+                        <span class="exp-company">Freelancer</span>
+                        <span class="exp-date">Jun 2021 – Out 2022</span>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Criação ponta a ponta de sites institucionais, landing pages de alta conversão e sistemas web responsivos para diversos clientes.</li>
+                        <li>Configuração completa de produção: domínios, certificados SSL, hospedagem, otimização de SEO técnico e atendimento direto ao cliente.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ==================== PAGE 2 ==================== -->
+    <div class="page">
+        <!-- Left Sidebar (Page 2) -->
+        <aside class="sidebar">
+            <div>
+                <h2 class="section-title">Expertise</h2>
+
+                <div class="sidebar-subheading">Idiomas</div>
+                <ul class="skill-list" style="margin-bottom: 18px;">
+                    <li>Português – Nativo</li>
+                    <li>Inglês – Técnico (Leitura avançada de docs e RFCs)</li>
+                </ul>
+
+                <div class="sidebar-subheading">Skills &amp; Ferramentas</div>
+                <ul class="skill-list">
+                    <li>WebRTC P2P</li>
+                    <li>WebSockets (Socket.io / ws)</li>
+                    <li>RESTful APIs</li>
+                    <li>HTML5 Canvas (60 FPS)</li>
+                    <li>Web Audio API</li>
+                    <li>PyTorch</li>
+                    <li>OpenCV</li>
+                    <li>Hugging Face Diffusers</li>
+                    <li>Real-ESRGAN</li>
+                    <li>FFmpeg</li>
+                    <li>Puppeteer</li>
+                    <li>Playwright</li>
+                    <li>Supabase</li>
+                    <li>Cloudflare R2</li>
+                    <li>SQL</li>
+                    <li>JWT &amp; Bcrypt</li>
+                    <li>RBAC &amp; 2FA</li>
+                    <li>LGPD Compliance</li>
+                    <li>APIs de Pagamento &amp; Webhooks</li>
+                    <li>Google Play Console</li>
+                    <li>Arquitetura de Software</li>
+                    <li>UX/UI &amp; Design Responsivo</li>
+                    <li>SEO Técnico</li>
+                    <li>Testes Automatizados</li>
                 </ul>
             </div>
+        </aside>
 
-            <!-- Projeto 2: KumaStream -->
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">KumaStream — Plataforma de Streaming Privado & Infraestrutura Cloud</span>
-                    <span class="project-tech">PHP 8.2, MySQL, Google Drive API, Mercado Pago, Tailwind CSS</span>
-                </div>
-                <ul class="project-bullets">
-                    <li>Projetou plataforma com suporte a mais de 300 usuários ativos e catálogo dinâmico de 1.200+ mídias integrado à API do TMDB.</li>
-                    <li>Engenharia de Cloud Storage Pool com Contas de Serviço do Google Drive, implementando balanceamento de carga e failover automático para contornar limites diários de cota (750 GB/dia).</li>
-                    <li>Desenvolveu módulo B2B para revendedores e afiliados com calculadora dinâmica de margem de lucro, controle de saques via PIX e split de comissões.</li>
-                    <li>Construiu régua de cobrança e motor de e-mail marketing integrado com renderizador WYSIWYG reativo para retenção e combate a churn.</li>
-                </ul>
-            </div>
+        <!-- Right Main Content (Page 2) -->
+        <main class="main">
+            <section>
+                <h2 class="section-title">Experiência Profissional</h2>
 
-            <!-- Projeto 3: AI Creator & Video Upscale Studio -->
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">AI Creator & Video Upscale Studio — Inteligência Artificial & Visão Computacional</span>
-                    <span class="project-tech">Python, PyTorch, Diffusers, FastAPI, Real-ESRGAN, OpenCV, PySide6</span>
+                <div class="exp-item">
+                    <div class="exp-role">Desenvolvedor Web Júnior</div>
+                    <div class="exp-meta">
+                        <span class="exp-company">UniCambury</span>
+                        <span class="exp-date">Fev 2019 – Mai 2021</span>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Manutenção, evolução e estabilidade do Portal do Aluno (módulos acadêmicos e financeiros) utilizado diariamente por estudantes e corpo docente.</li>
+                        <li>Implementação de melhorias contínuas de frontend e backend, otimização de consultas em banco de dados e resolução ágil de incidentes em produção.</li>
+                    </ul>
                 </div>
-                <ul class="project-bullets">
-                    <li>Desenvolveu motor local Text-to-Video utilizando Hugging Face Diffusers e Transformers exposto via microsserviço assíncrono com FastAPI.</li>
-                    <li>Construiu aplicação para restauração e upscaling de vídeo via GPU (Real-ESRGAN e waifu2x-ncnn-vulkan) com algoritmo de fallback automático para CPU.</li>
-                    <li>Interface desktop moderna desenvolvida em PySide6 (Qt para Python) e automação de pipelines via linha de comando.</li>
-                </ul>
-            </div>
+            </section>
 
-            <!-- Projeto 4: WhatsApp Automation SaaS -->
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">WhatsApp Campaign Engine & Live Inbox SaaS</span>
-                    <span class="project-tech">Node.js, TypeScript, Express, Socket.io, Baileys, MySQL, JWT</span>
-                </div>
-                <ul class="project-bullets">
-                    <li>Implementou plataforma de campanhas multicanal com pareamento dinâmico via QR Code utilizando engine Baileys.</li>
-                    <li>Algoritmo inteligente de proteção anti-ban com atrasos randômicos, filas de disparo e gerador de variações Spin-tax.</li>
-                    <li>Caixa de entrada (Inbox) bidirecional conectada em tempo real via WebSockets (Socket.io) com controle de acesso RBAC (Admin e Operador).</li>
-                </ul>
-            </div>
+            <section>
+                <h2 class="section-title">Projetos em Destaque</h2>
 
-            <!-- Projeto 5: P2P Torrent Engine -->
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">P2P Torrent Engine & Client Distribuído</span>
-                    <span class="project-tech">PHP, Aria2 JSON-RPC, MySQL, 2FA, LGPD Shield</span>
+                <div class="exp-item">
+                    <div class="exp-role">KumaLIVE — Streaming WebRTC, Comunidades &amp; Motor Gráfico 2D</div>
+                    <div class="exp-meta">
+                        <span class="exp-company">WebRTC • Canvas 2D • Web Audio API • PHP • MySQL</span>
+                        <span class="exp-date">2026 – Presente</span>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Transmissão de tela Ultra HD P2P em 1080p60 com latência inferior a 300ms via manipulação de SDP (15 Mbps) e fila inteligente de ICE Candidates.</li>
+                        <li>Motor gráfico procedural em Canvas 2D a 60 FPS com 24+ skins animadas e síntese sonora dinâmica via Web Audio API nativa.</li>
+                        <li>Arquitetura social estilo Discord (canais de voz/texto, DMs, cargos) e economia virtual com Season Pass.</li>
+                    </ul>
                 </div>
-                <ul class="project-bullets">
-                    <li>Integração de alta performance com motor local Aria2 via chamadas JSON-RPC para downloads com velocidade máxima.</li>
-                    <li>Camada de segurança com autenticação de dois fatores (2FA), rate limiting e conformidade rigorosa com a LGPD.</li>
-                </ul>
-            </div>
-        </section>
 
-        <!-- FORMAÇÃO ACADÊMICA & IDIOMAS -->
-        <section>
-            <h2>Formação Acadêmica & Idiomas</h2>
-            <div class="education-item" style="margin-bottom: 8px;">
-                <div>
-                    <strong>Análise e Desenvolvimento de Sistemas (ADS)</strong> — Faculdade SENAI Fatesg <em>(Cursando)</em>
+                <div class="exp-item">
+                    <div class="exp-role">KumaSistem — Gestão de Colaboradores, Estoque &amp; Vendas</div>
+                    <div class="exp-meta">
+                        <span class="exp-company">Full Stack • Arquitetura Corporativa</span>
+                        <span class="exp-date">2026 – Presente</span>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Sistema completo de gestão comercial desenvolvido do zero e atualmente em uso em produção por 3 empresas.</li>
+                    </ul>
                 </div>
-                <span>Goiânia, GO</span>
-            </div>
-            <div class="education-item">
-                <div>
-                    <strong>Desenvolvimento de Software / Web</strong> — Escola do Futuro de Goiás
+
+                <div class="exp-item">
+                    <div class="exp-role">AI Creator &amp; Video Upscale Studio / WhatsApp SaaS</div>
+                    <div class="exp-meta">
+                        <span class="exp-company">Python • PyTorch • FastAPI • Node.js • Socket.io • Baileys</span>
+                        <span class="exp-date">Projetos Autorais</span>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Pipeline local Text-to-Video (Diffusers + FastAPI) e super-resolução de vídeo via GPU com Real-ESRGAN e PySide6.</li>
+                        <li>Plataforma SaaS de automação WhatsApp (Baileys) com proteção anti-ban, Inbox em tempo real via WebSockets e controle RBAC.</li>
+                    </ul>
                 </div>
-                <span>Goiânia, GO</span>
-            </div>
-            <div style="font-size: 12px; color: #475569; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #e2e8f0;">
-                <strong>Idiomas:</strong> Português (Nativo) • Inglês Técnico (Leitura fluente de documentação técnica e especificações RFC/API)
-            </div>
-        </section>
+            </section>
+        </main>
     </div>
 
 </body>
